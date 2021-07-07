@@ -39,7 +39,21 @@ namespace TestRIT
             lastPoint = new Point(e.X, e.Y);
         }
          
-
+        private void linkbuttons()
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                DataGridViewLinkCell linkedCell = new DataGridViewLinkCell();
+                dataGridView1[7, i] = linkedCell;
+                dataGridView1[7, i].Value = "Удалить";
+                DataGridViewLinkCell linkedCell1 = new DataGridViewLinkCell();
+                dataGridView1[5, i] = linkedCell1;
+                dataGridView1[5, i].Value = "Добавить";
+                DataGridViewLinkCell linkedCell2 = new DataGridViewLinkCell();
+                dataGridView1[6, i] = linkedCell2;
+                dataGridView1[6, i].Value = "Изменить";
+            }
+        }
         private void LoadData()
         {
             try
@@ -69,20 +83,7 @@ namespace TestRIT
                 foreach (string[] s in data)
                     dataGridView1.Rows.Add(s);
 
-                for (int i = 0; i < dataGridView1.RowCount; i++)
-                {
-                    DataGridViewLinkCell linkedCell = new DataGridViewLinkCell();
-                    dataGridView1[7, i] = linkedCell;
-                    dataGridView1[7, i].Value = "Удалить";
-                    DataGridViewLinkCell linkedCell1 = new DataGridViewLinkCell();
-                    dataGridView1[5, i] = linkedCell1;
-                    dataGridView1[5, i].Value = "Добавить";
-                    DataGridViewLinkCell linkedCell2 = new DataGridViewLinkCell();
-                    dataGridView1[6, i] = linkedCell2;
-                    dataGridView1[6, i].Value = "Изменить";
-                }
-            
-
+                linkbuttons();
 
             }
             catch (Exception ex)
@@ -156,7 +157,6 @@ namespace TestRIT
 
                         db.closeConnection();
 
-                        
 
                     }
                 }
@@ -188,5 +188,9 @@ namespace TestRIT
 
         }
 
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            linkbuttons();
+        }
     }
 }
